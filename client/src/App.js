@@ -2,9 +2,9 @@ import './App.css';
 
 import { Routes, Route } from 'react-router-dom';
 
-import { LandingPage } from './pages/LandingPage/LandingPage';
-import { Homepage } from './pages/HomePage/Homepage';
-import { Cards } from './pages/Cards/Cards';
+import LandingPage from './pages/LandingPage/LandingPage';
+import Homepage from './pages/HomePage/Homepage';
+import Cards  from './pages/Cards/Cards';
 import { NotFound } from './pages/NotFound/NotFound';
 import { Details } from './pages/Details/Details';
 import { Make } from './pages/Make/Make';

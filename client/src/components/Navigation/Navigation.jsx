@@ -1,19 +1,31 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { connect, useDispatch } from "react-redux";
+import { searchRecipe } from "../../redux/actions/actions.js"
+
 import styles from './Navigation.module.css';
+
 
 import searchBtn from "../../utils/search-outline.svg"
 import closeBtn from "../../utils/close-outline.svg";
 import menuBtn from "../../utils/menu-outline.svg";
 
 
-export const Navigation = () => {
+ const Navigation = ({search}) => {
   const [isOpen, setIsOpen] = useState(false); 
   const [isToggleOn, setIsToggleOn] = useState(false);
+  const [searchValue, setSearchValue] = useState({
+    searchBox:""
+  });
+
+  const dispatch = useDispatch();
   
   const handleClickSearchBtn =()=> {
     setIsOpen(true);
     setIsToggleOn(false);
+    isOpen ? dispatch(searchRecipe(searchValue.searchBox))
+    : setSearchValue({...searchValue,searchBox:""});
+    
   }
   
   const handleClickCloseBtn =()=> {
@@ -25,13 +37,24 @@ export const Navigation = () => {
     setIsOpen(false);
   }
 
+  //Redux
+
+  const onSearchChange = (e)=> {
+    setSearchValue({
+      ...searchValue,
+      [e.target.name]: e.target.value
+    });
+  }
+
+
+
   return (
     <header className={ isToggleOn? styles.open : ""}>
-      <a href="/food" className={styles.logo} >Henry Food</a>
+      <a href="/" className={styles.logo} >Henry Food</a>
       <div className={styles.group}>
         <ul className={styles.navigation}>
-          <li><Link to="/Food">Home</Link></li>
-          <li><Link to="/Food/make">Create</Link></li>
+          <li><Link to="/food">Home</Link></li>
+          <li><Link to="/food/make">Create</Link></li>
         </ul>
         <div className={styles.search}>
           <span className={styles.icon}>
@@ -59,8 +82,22 @@ export const Navigation = () => {
         />
       </div>
       <div className={`${styles.searchBox}  ${isOpen ? styles.active : ""}`}>
-        <input type="text" placeholder="search..." />
+        <input 
+          type="text" 
+          name="searchBox"
+          placeholder="look for your recipe..." 
+          value={searchValue.searchBox} 
+          onChange={onSearchChange} 
+        />
       </div>
     </header>
   );
 }
+
+const mapStateToProps = (state) => {
+  return {
+    search : state.search
+  }
+}
+
+export default connect (mapStateToProps, null )(Navigation)

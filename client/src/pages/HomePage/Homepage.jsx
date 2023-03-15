@@ -1,8 +1,9 @@
 import React from 'react';
-import { Navigation } from '../../components/Navigation/Navigation';
+import Navigation from '../../components/Navigation/Navigation';
 import { Outlet } from 'react-router-dom';
 
-export const Homepage = () => {
+const Homepage = () => {
+
   return (
     <div>
       <Navigation/>
@@ -10,3 +11,5 @@ export const Homepage = () => {
     </div>
   )
 }
+
+export default Homepage;

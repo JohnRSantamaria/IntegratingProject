@@ -1,0 +1,4 @@
+export const GET_RECIPES = "GET_RECIPES";
+export const SEARCH_RECIPE = "SEARCH_RECIPE";
+export const NINE_CARDS = "NINE_CARDS";
+export const FILTERED_RECIPES = "FILTERED_RECIPES";
