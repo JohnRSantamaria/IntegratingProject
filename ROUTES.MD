@@ -2,7 +2,7 @@
 - __Get/__ https://api.spoonacular.com/recipes/complexSearch?apiKey=f20eb17f27e84ecb8ba11e201c0bc257 (_Busca las imagenes tiene id,title,img, imageType_)
 - __Get/__ https://api.spoonacular.com/recipes/complexSearch?apiKey=f20eb17f27e84ecb8ba11e201c0bc257&addRecipeInformation=true
 - __Get/__ Search By 'ID': "https://api.spoonacular.com/recipes/{id}/information?apiKey=f20eb17f27e84ecb8ba11e201c0bc257"
-- __Para todas las 100:__ https://api.spoonacular.com/recipes/complexSearch?number=100&apiKey=f20eb17f27e84ecb8ba11e201c0bc257&addRecipeInformation=true
+- __Para todas las 100:__ https://api.spoonacular.com/recipes/complexSearch?number=1&apiKey=f20eb17f27e84ecb8ba11e201c0bc257&addRecipeInformation=true
 - 
 - 
 - 
@@ -58,3 +58,13 @@ Este formulario debe ser **controlado completamente con JavaScritp**. No se pued
 -  Imagen.
 -  Posibilidad de seleccionar/agregar varios tipos de dieta en simultáneo.
 -  Botón para crear la receta.
+
+<br>
+
+### **RUTAS DEL BACK**
+
+- __Get/__ http://localhost:3001/diets: "_regresa todos los tipos de dietas_"
+- __Get/__ http://localhost:3001/recipes "_reresa todas la comidas de la api y la DB_"
+- __Get/__ http://localhost:3001/recipes/:id "_regresa el elemento que coincida con el id_" [__Id necesita ser un String__]
+- __Get/__ http://localhost:3001/recipes?name=... "_regresa el elemento que coincida con el name_"
+- __Post/__ http://localhost:3001/recipes "_Almacenara la informacion enviada en el back_"
