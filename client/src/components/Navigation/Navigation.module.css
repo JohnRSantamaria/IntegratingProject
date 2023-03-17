@@ -161,6 +161,7 @@ header .search{
     cursor: pointer;
     transform: translateX(30px);
     z-index: 10;
+  
   }
 
   header .navigation{
@@ -168,6 +169,7 @@ header .search{
     opacity: 0;
     visibility: hidden;
     left: 100%;
+    /* transition: all 0.2s; */
   }
   header.open .navigation{
     top: 80px;

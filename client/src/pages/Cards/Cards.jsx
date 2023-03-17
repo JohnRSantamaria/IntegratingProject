@@ -3,11 +3,14 @@ import { Card } from "../Card/Card";
 import Filters from "../../components/Filters/Filters";
 import Pagination from "../../components/Pagination/Pagination";
 import styles from "./Cards.module.css";
+import Search from "../../components/Search/Search";
 
 const Cards = ({ nineCards }) => {
+
   return (
-    <>
+    <>    
       <Filters/>
+      <Search/>
       <div className={styles.cardsContainer}>
         {
           nineCards.map(({ id, healthScore, title, image, summary, steps, diets }) => (
@@ -31,7 +34,7 @@ const Cards = ({ nineCards }) => {
 
 const mapStateToProps = (state) => {
   return {
-    nineCards: state.nineCards
+    nineCards: state.nineCards,
   }
 }
 

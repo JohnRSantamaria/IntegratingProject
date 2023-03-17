@@ -1,7 +1,7 @@
 const fetchAllData = require("../helpers/fetchAllData");
 
 const getRecipesAPI = async () => {
-  const response = await fetchAllData(7);
+  const response = await fetchAllData(1);
   if (!response.ok) throw Error(response.status);
 
   const { results } = await response.json();

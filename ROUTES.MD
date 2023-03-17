@@ -68,3 +68,7 @@ Este formulario debe ser **controlado completamente con JavaScritp**. No se pued
 - __Get/__ http://localhost:3001/recipes/:id "_regresa el elemento que coincida con el id_" [__Id necesita ser un String__]
 - __Get/__ http://localhost:3001/recipes?name=... "_regresa el elemento que coincida con el name_"
 - __Post/__ http://localhost:3001/recipes "_Almacenara la informacion enviada en el back_"
+- 
+- __Get/__ http://localhost:3001/api "_Traer toda la informacion de la API_"
+- __Get/__ http://localhost:3001/db "_Traer toda la infroamcin de la DB_"
+- 

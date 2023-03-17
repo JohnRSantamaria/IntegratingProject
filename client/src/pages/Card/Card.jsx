@@ -13,7 +13,7 @@ export const Card = ({title,image,diets}) => {
     <div className={`${styles.face} ${styles.back}`}>
       <h3>Diets</h3>
       <ul>
-        {/* {diets.map(d=><li>{d}</li>)} */}
+        {diets.map((d,i)=><li key={i} >{d}</li>)}
       </ul>
       <div className={styles.link}>
         <Link to="/food/detail" >Details</Link>

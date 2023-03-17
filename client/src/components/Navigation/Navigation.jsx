@@ -5,13 +5,12 @@ import { searchRecipe } from "../../redux/actions/actions.js"
 
 import styles from './Navigation.module.css';
 
-
 import searchBtn from "../../utils/search-outline.svg"
 import closeBtn from "../../utils/close-outline.svg";
 import menuBtn from "../../utils/menu-outline.svg";
 
 
- const Navigation = ({search}) => {
+ const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false); 
   const [isToggleOn, setIsToggleOn] = useState(false);
   const [searchValue, setSearchValue] = useState({
@@ -24,8 +23,7 @@ import menuBtn from "../../utils/menu-outline.svg";
     setIsOpen(true);
     setIsToggleOn(false);
     isOpen ? dispatch(searchRecipe(searchValue.searchBox))
-    : setSearchValue({...searchValue,searchBox:""});
-    
+    : setSearchValue({...searchValue,searchBox:""});   
   }
   
   const handleClickCloseBtn =()=> {
@@ -45,16 +43,17 @@ import menuBtn from "../../utils/menu-outline.svg";
       [e.target.name]: e.target.value
     });
   }
-
-
+  const handleClick = ()=>{
+    setIsToggleOn(!isToggleOn);
+  }
 
   return (
     <header className={ isToggleOn? styles.open : ""}>
       <a href="/" className={styles.logo} >Henry Food</a>
       <div className={styles.group}>
         <ul className={styles.navigation}>
-          <li><Link to="/food">Home</Link></li>
-          <li><Link to="/food/make">Create</Link></li>
+          <li><Link to="/food" onClick={handleClick}>Home</Link></li>
+          <li><Link to="/food/make" onClick={handleClick}>Create</Link></li>
         </ul>
         <div className={styles.search}>
           <span className={styles.icon}>
@@ -94,10 +93,4 @@ import menuBtn from "../../utils/menu-outline.svg";
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    search : state.search
-  }
-}
-
-export default connect (mapStateToProps, null )(Navigation)
+export default connect (null, null )(Navigation)
