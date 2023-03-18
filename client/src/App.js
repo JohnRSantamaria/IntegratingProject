@@ -15,7 +15,7 @@ function App() {
       <Route path='/' element={<LandingPage/>}/>
       <Route path='food' element={<Homepage/>}>
         <Route index element = {<Cards/>}/>
-        <Route path='detail' element={<Details/>}/>
+        <Route path='detail/:id' element={<Details/>}/>
         <Route path='make' element={<Make/>}/>
       </Route>
       <Route path='*' element={<NotFound/>}/>

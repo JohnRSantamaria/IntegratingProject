@@ -4,6 +4,6 @@ export const foodApi = axios.create({
 })
 
 /*
-http://localhost:3001/recipes
+http://localhost:3001/recipes/:id
 http://localhost:3001/diets
 */

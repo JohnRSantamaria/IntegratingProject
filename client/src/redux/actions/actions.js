@@ -1,4 +1,4 @@
-import { GET_RECIPES, SEARCH_RECIPE, NINE_CARDS, FILTERED_RECIPES, SEARCH_RESULTS, GET_APIDATA, GET_DATABASE} from "./types";
+import { GET_RECIPES, SEARCH_RECIPE, NINE_CARDS, FILTERED_RECIPES, SEARCH_RESULTS, GET_APIDATA, GET_DATABASE, ORDER_HEALTHIER, ORDER_ALPHA} from "./types";
 
 export function getRecipes  (recipes) {
   return {
@@ -48,4 +48,18 @@ export function getDatabase (data) {
     type: GET_DATABASE,
     payload: data
   } 
+}
+
+export function orderAlpha (order) {
+  return {
+    type: ORDER_ALPHA,
+    payload: order
+  }
+}
+
+export function orderHalthier (order) {
+  return {
+    type: ORDER_HEALTHIER,
+    payload: order
+  }
 }

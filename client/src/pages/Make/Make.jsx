@@ -1,16 +1,37 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 export const Make = () => {
+  
+  const [images, setImages] = useState([]);
+  const [imageURLs, setImageURLs] = useState([]);
+
+  useEffect(()=> {
+    if(images.length < 1) return;
+    const newImageUrls = [];
+    
+    images.forEach( image => newImageUrls.push(URL.createObjectURL(image)));
+    setImageURLs(newImageUrls);
+
+  }, [images])
+
+  const onImageChange = (e)=> {
+    setImages([...e.target.files]);
+  }
+
+
+
+
+console.log(imageURLs);
+
   return (
     <div>
-    <h3>Make your own recipe</h3>
-    <h4>nombre</h4>
-    <h4>resumen</h4>
-    <h4>nivel de comida</h4>
-    <h4>Paso a paso</h4>
-    <h4>Imagen</h4>
-    <h4>tipos de dieta </h4>
-    <h4>Boton para la crear la receta</h4>
+      <form action="">
+        <label htmlFor="image"></label>
+        <div>
+        { imageURLs.map(imageSrc => <img src={imageSrc} alt="Ima" style={{width:300, height:300}}/> )}
+        </div>
+        <input type="file" multiple accept='image/*' onChange={onImageChange}/>
+      </form>
     </div>
   )
 }

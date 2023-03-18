@@ -3,7 +3,7 @@ import styles from './Card.module.css';
 import { Link } from 'react-router-dom';
 
 
-export const Card = ({title,image,diets}) => {
+export const Card = ({id, title, image, diets}) => {
   return (
     <div className={styles.card}>
     <div className={`${styles.face} ${styles.front}`}>
@@ -16,7 +16,7 @@ export const Card = ({title,image,diets}) => {
         {diets.map((d,i)=><li key={i} >{d}</li>)}
       </ul>
       <div className={styles.link}>
-        <Link to="/food/detail" >Details</Link>
+        <Link to={`/food/detail/${id}`}>Details</Link>
       </div>
     </div>
   </div>
