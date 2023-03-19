@@ -3,12 +3,11 @@ import { useEffect, useState } from "react";
 import { getNineCards } from "../../redux/actions/actions";
 
 
-const Pagination = ({ filteredR, recipes }) => {
+const Pagination = ({ filteredR }) => {
 
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(9);
-
 
   useEffect(()=> {
     setCurrentPage(1)
@@ -57,8 +56,6 @@ const Pagination = ({ filteredR, recipes }) => {
 const mapStateToProps = (state) => {
   return {
     filteredR: state.filteredR,
-    ordered: state.ordered,
-    recipes: state.recipes
   }
 }
-export default connect(mapStateToProps, null)(Pagination)
+export default connect(mapStateToProps)(Pagination)

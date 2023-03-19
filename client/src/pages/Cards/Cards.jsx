@@ -38,6 +38,6 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, null)(Cards);
+export default connect(mapStateToProps)(Cards);
 
 

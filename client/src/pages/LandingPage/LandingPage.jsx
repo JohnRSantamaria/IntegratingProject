@@ -14,8 +14,8 @@ const LandingPage = () => {
   const dispatch = useDispatch();
   
   const { isLoading, recipes  } = useRecipes();
-  const { isLoadingAPI, infoAPI } = useAPI();
-  const { isLoadingDB, infoDB} = useDB();  
+  const { infoAPI } = useAPI();
+  const { infoDB} = useDB();  
 
   const handleClick = () => {
     dispatch(getRecipes(recipes));
@@ -27,9 +27,9 @@ const LandingPage = () => {
     <div>
       <p>Landing Page</p>
       {
-        isLoading && isLoadingAPI && isLoadingDB 
-        ? <Loader /> 
-        : <Link to="Food" onClick={handleClick}>Click me</Link>
+        isLoading  ?
+        <Loader /> :
+        <Link to="Food" onClick={handleClick}>Click me</Link>
       }
     </div>
   )

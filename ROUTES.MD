@@ -72,3 +72,19 @@ Este formulario debe ser **controlado completamente con JavaScritp**. No se pued
 - __Get/__ http://localhost:3001/api "_Traer toda la informacion de la API_"
 - __Get/__ http://localhost:3001/db "_Traer toda la infroamcin de la DB_"
 - 
+---
+
+# Formato del objeto
+
+- **Diets**: _['gluten free', 'dairy free', 'lacto ovo vegetarian']_ _It need to be slected multiple times_
+- **heathScrore**: _0;100_ _(necesita ser un numero)_  
+- **title**: _(needs to be a string)_
+- **image** _(needs to be a string of a link)_
+- **summary** _(could be a innerHTML)_
+- **steps**: _(is is an Array of objects in this way)_
+    - [
+        - {number: 1 "_it´s a nuber_" , step: "_it´s a string_"}
+        - {number: 2 "_it´s a nuber_" , step: "_it´s a string_"}
+        - {number: 3 "_it´s a nuber_" , step: "_it´s a string_"}
+    - ]
+- !healthScore || !title || !image || !summary || !steps) 

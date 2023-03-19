@@ -1,9 +1,10 @@
-import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 import { connect, useDispatch } from "react-redux";
-import { searchRecipe } from "../../redux/actions/actions.js"
 
 import styles from './Navigation.module.css';
+
+import { searchRecipe } from "../../redux/actions/actions.js"
 
 import searchBtn from "../../utils/search-outline.svg"
 import closeBtn from "../../utils/close-outline.svg";
@@ -93,4 +94,4 @@ import menuBtn from "../../utils/menu-outline.svg";
   );
 }
 
-export default connect (null, null )(Navigation)
+export default connect ()(Navigation)

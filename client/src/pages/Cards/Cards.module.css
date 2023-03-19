@@ -1,7 +1,7 @@
 .cardsContainer {
   display: flex;
   flex-wrap: wrap;
-  align-items: self-start;
+  align-items: flex-start;
   justify-content: center;
-  min-height: 100vh;
+  min-height: calc(100vh - 130px); 
 }

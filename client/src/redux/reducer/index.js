@@ -6,7 +6,15 @@ const initialState = {
   nineCards: [],
   apiData:[],
   dataBase:[],
-  search: ""
+  search: "",
+  infoFrom: {
+    healthScore: 0,
+    title:"",
+    image : "",
+    summary: "",
+    steps:[{}],
+    diets:[]    
+  }
 }
 
 const rootReducer = (state = initialState, {type,payload}) => {

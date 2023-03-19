@@ -13,14 +13,12 @@ const Search = ({search}) => {
     dispatch(searchRecipe(""));
   }
 
-
   return (
     <span>
       {
         isLoading && <Loader />
       }
     </span>
-
   );
 }
 
@@ -30,4 +28,4 @@ const mapStateToProps = (state)=> {
   }
 }
 
-export default connect(mapStateToProps, null)(Search);
+export default connect(mapStateToProps)(Search);
