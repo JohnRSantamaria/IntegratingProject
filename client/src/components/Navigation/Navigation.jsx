@@ -10,6 +10,7 @@ import searchBtn from "../../utils/search-outline.svg"
 import closeBtn from "../../utils/close-outline.svg";
 import menuBtn from "../../utils/menu-outline.svg";
 
+import { useNavigate } from "react-router-dom";
 
  const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false); 
@@ -17,15 +18,17 @@ import menuBtn from "../../utils/menu-outline.svg";
   const [searchValue, setSearchValue] = useState({
     searchBox:""
   });
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
   
   const handleClickSearchBtn =()=> {
     setIsOpen(true);
     setIsToggleOn(false);
-    isOpen ? dispatch(searchRecipe(searchValue.searchBox))
-    : setSearchValue({...searchValue,searchBox:""});   
-  }
+    isOpen ? dispatch(searchRecipe(searchValue.searchBox)) && navigate("/food") 
+    : setSearchValue({...searchValue,searchBox:""}); 
+    
+  } 
   
   const handleClickCloseBtn =()=> {
     setIsOpen(false);
@@ -34,6 +37,14 @@ import menuBtn from "../../utils/menu-outline.svg";
   const handleClickHeader = ()=> {
     setIsToggleOn(!isToggleOn);
     setIsOpen(false);
+  }
+  const handleSearch = (e)=> {
+    if (e.key.toLowerCase() === 'enter') {
+      setIsOpen(true);
+      setIsToggleOn(false);
+      isOpen ? dispatch(searchRecipe(searchValue.searchBox)) && navigate("/food") 
+      : setSearchValue({...searchValue,searchBox:""}); 
+  }
   }
 
   //Redux
@@ -49,7 +60,7 @@ import menuBtn from "../../utils/menu-outline.svg";
   }
 
   return (
-    <header className={ isToggleOn? styles.open : ""}>
+    <header className={ isToggleOn? styles.open : ""} onKeyDown={(e)=> handleSearch(e)}>
       <a href="/" className={styles.logo} >Henry Food</a>
       <div className={styles.group}>
         <ul className={styles.navigation}>
@@ -63,7 +74,7 @@ import menuBtn from "../../utils/menu-outline.svg";
               alt="SearchBtn" 
               name="search-outline" 
               className={`${styles.searchBtn} ${isOpen ? styles.active : ""}`}              
-              onClick={handleClickSearchBtn}
+              onClick={handleClickSearchBtn}          
             />
             <img 
               src={closeBtn} 

@@ -5,9 +5,9 @@ import { Routes, Route } from 'react-router-dom';
 import LandingPage from './pages/LandingPage/LandingPage';
 import Homepage from './pages/HomePage/Homepage';
 import Cards  from './pages/Cards/Cards';
+import Make from './pages/Make/Make.jsx';
 import { NotFound } from './pages/NotFound/NotFound';
 import { Details } from './pages/Details/Details';
-import { Make } from './pages/Make/Make';
 
 function App() {
   return (

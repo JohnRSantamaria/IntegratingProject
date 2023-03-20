@@ -12,7 +12,6 @@ export const useDiets = ()=> {
       setDiets(diets);
     })
   }, [])
-
   return{
     isLoading,
     diets
