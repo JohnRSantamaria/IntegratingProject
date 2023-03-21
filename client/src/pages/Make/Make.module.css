@@ -10,6 +10,7 @@ section
   overflow-x: hidden;
   background-color: black;
 }
+
 .backGround
 {
   position: absolute;
@@ -40,7 +41,7 @@ section
 .container legend
 {
   font-size: 1.3em;
-  color: #fff;
+  color: #fff;  
 }
 
 .container button
@@ -241,7 +242,7 @@ section
 {
  margin-top: 10px;
  background:  rgba(0, 0, 0, 0.2);
- max-height: 120px;
+ max-height: 165px;
  border: 1px solid rgba(255, 255, 255, 0.15);
  color: #fff;
  display: flex;
@@ -282,7 +283,7 @@ section
   }
   .formRight .containerToDoList
   {
-    max-height: 150px;
+    max-height: 210px;
   }
 
 }

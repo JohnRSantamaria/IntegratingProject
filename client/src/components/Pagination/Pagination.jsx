@@ -1,11 +1,36 @@
 import { connect, useDispatch } from "react-redux"
 import { useEffect, useState } from "react";
 import { getNineCards } from "../../redux/actions/actions";
+import { useDB } from "../../hooks/useDB";
+import { fetchDataBase } from "../../helpers/fetchDataBase";
+import { getDatabase, getRecipes } from "../../redux/actions/actions";
+import { fetchAllData } from "../../helpers/fetchAllData";
 
-
-const Pagination = ({ filteredR }) => {
+const Pagination = ({ filteredR, dataBase }) => {
 
   const dispatch = useDispatch();
+
+  const {infoDB} = useDB();
+
+  useEffect(()=> {
+    
+    if(dataBase.length !== infoDB.length){
+      fetchDataBase()
+      .then(db => {
+        dispatch(getDatabase(db));
+      })
+
+      fetchAllData()
+      .then(recipes => {
+        dispatch(getRecipes(recipes));
+      })
+
+    }
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [infoDB])
+
+
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(9);
 
@@ -56,6 +81,7 @@ const Pagination = ({ filteredR }) => {
 const mapStateToProps = (state) => {
   return {
     filteredR: state.filteredR,
+    dataBase: state.dataBase
   }
 }
 export default connect(mapStateToProps)(Pagination)

@@ -7,3 +7,5 @@ export const NINE_CARDS = "NINE_CARDS";
 export const FILTERED_RECIPES = "FILTERED_RECIPES";
 export const ORDER_ALPHA = "ORDER_ALPHA";
 export const ORDER_HEALTHIER = "ORDER_HEALTHIER";
+export const LIST_OF_ERRORS = "LIST_OF_ERRORS";
+export const SET_ERROR = "SET_ERROR";

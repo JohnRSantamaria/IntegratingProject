@@ -1,18 +1,20 @@
 import { useState, useEffect } from "react";
 import { fetchDataBase } from "../helpers/fetchDataBase"
-
-export const useDB = (placesFilterHandler)=> {
+                    //placesFilterHandler
+export const useDB = ()=> {
   const [isLoadingDB, setIsLoadingDB] = useState(true);
   const [infoDB, setInfoDB] = useState([]);
 
   useEffect(()=> {
     fetchDataBase()
-    .then(db=> {
+    .then(db => {
       setIsLoadingDB(false);
       setInfoDB(db);
     })
-  },[placesFilterHandler]);
+  },[]);
 
+  //placesFilterHandler
+  
   return{
     isLoadingDB,
     infoDB

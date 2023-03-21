@@ -1,19 +1,20 @@
 const {Diets, Recipe} = require("../db");
 
 const postRecipes = async (data) => {
+
   const {healthScore,title,image,summary,steps,diets} = data;
   
   if(!healthScore || !title || !image || !summary || !steps) throw new Error ("Incomple data");
 
   const newRecipe = {
-    healthScore,
+    healthScore: Number(healthScore),
     title,
-    image,
+    image: image[0],
     summary,
     steps
   }
 
-
+  
 //Making the Recipe
   const recipeCreated = await Recipe.create(newRecipe);
 //Looking fro the name of the Diet

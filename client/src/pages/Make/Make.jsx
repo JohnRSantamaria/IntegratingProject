@@ -1,31 +1,74 @@
-import {connect} from "react-redux";
+import {connect, useDispatch} from "react-redux";
 import { useDiets } from "../../hooks/useDiets";
 import { useState, useEffect } from "react";
-import styles from "./Make.module.css";
+import { getListOfErrors, setError } from "../../redux/actions/actions";
+
 import validation from "./validation.js";
+import styles from "./Make.module.css";
+import Error  from "../../components/Error/Error";
+
+
+
 
 const Make = () => {
-  const { isLoading, diets } = useDiets();
+  const { isLoading, diet } = useDiets();
+  const dispatch = useDispatch();
 
   const [ images, setImages ] = useState([]);
-  const [ imageURLs, setImageURLs ] = useState(["https://img.freepik.com/vector-premium/icono-vector-imagen-signo-foto-aislado_118339-3177.jpg?w=826"]);
+  const [ imageURLs, setImageURLs ] = useState(['https://img.freepik.com/vector-premium/icono-vector-imagen-signo-foto-aislado_118339-3177.jpg?w=826']);
   const [step, setStep] = useState('');
   const [toDos, setToDos] = useState([]);
-
-  const [data, setData] = useState({});
-
   const [errors, setErrors] = useState({});
+
+  const [data, setData] = useState({
+    title: "",
+    summary: "",
+    diets:[],
+    healthScore: 0,
+    image: []
+  });
 
   useEffect(()=> {
     if(images.length < 1) return;
     const newImagesUrls = [];
-    images.forEach( image => newImagesUrls.push(URL.createObjectURL(image)));
-    setImageURLs(newImagesUrls);
+    images.forEach( image => {
+      newImagesUrls.push(URL.createObjectURL(image));
+      setImageURLs(newImagesUrls);
+      
+    setData({
+      ...data,
+      image:newImagesUrls
+    })
+
+    setErrors(
+      validation({
+        ...data,
+        image:newImagesUrls
+    }))
+  });
+    
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [images])
 
+  useEffect(()=> {
+    data.steps = toDos;
+    setData({
+      ...data,
+      steps:toDos,
+    })
+
+    setErrors(
+      validation({
+        ...data,
+        steps:toDos
+      })
+    )
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [toDos])
+
   const onImageChange = (e)=> {
-    setImages([...e.target.files]);
-    
+    setImages([...e.target.files])
+
   }
 
   const addTodo = (step) => {
@@ -39,106 +82,183 @@ const Make = () => {
     const todoList = [...toDos]
     
     todoList.push(newTodo);
-    setToDos(todoList);
+    setToDos(todoList);    
   }
 
   const handleAddTodo = (e) => {
       if (e.key.toLowerCase() === 'enter') {
           addTodo(step);
           setStep('');
-      }
+      }     
   }
 
   const handleEvents = (e)=> {
     setData({
       ...data,
-      [e.target.name]:[{value:e.target.value},{checked:e.target.checked}]
+      [e.target.name]:e.target.value,
     })
 
     setErrors(
       validation({
         ...data,
-        [e.target.name]:[{value:e.target.value},{checked:e.target.checked}]
+        [e.target.name]:e.target.value
       })
     )
 
   }
 
-  const handleSubmit = (e)=> {
-    console.log(toDos)
-    console.log(imageURLs[0])
-    console.log(errors)
+  const handleEventsCheck = (e)=> {    
+    if(e.target.checked){
+      data.diets = [...data.diets, e.target.name]
+    }else{
+      data.diets = data.diets.filter(d => d !== e.target.name);
+    }
+
+    setData({
+      ...data,
+      diet:data.diets
+    })
+
+    setErrors(
+      validation({
+        ...data,
+        diet: data.diets
+      })
+    )
+
   }
 
+  const handleSubmit = async ()=> {
+    const error = Object.values(errors);
+    
+    if(error.length === 0){
+      try {
+        const response = await fetch("http://localhost:3001/recipes", {
+          method:"POST",
+          headers: {
+            "Content-Type": "application/json",
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: JSON.stringify(data)
+        })
+
+        if(response.status !== 200) throw new Error("There was an error creating the recipe.");
+
+        window.alert("The recipe was created successfully");
+          
+      } catch (error) {
+        window.alert("There was an error creating the recipe");
+      }
+    }else{
+      dispatch(getListOfErrors(error));
+      dispatch(setError(true));
+    }
+
+    
+
+  }
 
   return (
-    <section>
+    <>
+    <section>         
       <div className={styles.backGround}/>
+      
       <fieldset className={styles.container}>
+
         <legend>Create your own recipe</legend>
         <div className={styles.formContainer}>
+       
           <div className={styles.formLeft}>
-            <div className={styles.inputBox}>
-              <label htmlFor="title">Title</label>
+                {/* title Container */}
+            <div className={styles.inputBox} >
+              <label 
+                htmlFor="title" 
+                >Title</label>
                 <input
                   type="text"
                   name="title"
-                  placeholder="Name of your recipe" 
-                  
-                  onChange={handleEvents}         
+                  placeholder="Name of your recipe"                 
+                  style={{borderColor: errors.title && "red"}}
+                  onChange={handleEvents}                           
                 />
             </div>
+                {/* Summary Container */}
             <div className={styles.inputBox}>
-            <label htmlFor="summary">Summay</label>
+            <label htmlFor="summary">Summay *</label>
             <textarea
               type="fake-textarea"
               autoComplete="on"
               cols="10"
               placeholder="summary of your recipe"
               name="summary"  
-              onChange={handleEvents}           
+              onChange={handleEvents}    
+              style={{borderColor: errors.summary && "red"}}       
             />
-            </div>            
+            </div>           
+                {/* Diets Container */}
             <div className={styles.inputBox}>
-              <label htmlFor="diets">Diets</label>
+              <label htmlFor="diets">Diets *</label>
               <div className={styles.diets}>                
                   {
-                    isLoading || diets.map(diet=> (
-                      <div className={styles.center}>
+                    isLoading ? <p> loading... </p> : diet.map(diet=> (
+                      <div className={styles.center} key={diet.id}>
                         <label key={diet.id}>
-                          <input type="checkbox" onChange={handleEvents} name={diet.name}/> {diet.name}                          
+                          <input 
+                            type="checkbox" 
+                            onChange={handleEventsCheck} 
+                            name={diet.name}                            
+                          /> {diet.name}                          
                         </label>
                       </div>                                    
                     ))
                   }                                                             
               </div>
             </div>
+                {/* Health Score Container */}
             <div className={styles.inputBox}>
-                <label htmlFor="rating">Rating</label>
-                <input type="number" min={0} max={100} placeholder="How healthy is it?" name="raiting" onChange={handleEvents}/>
+                <label htmlFor="healthScore">Health Score *</label>
+                <input 
+                  type="number" 
+                  min={0} 
+                  max={100} 
+                  placeholder="How healthy is it?" 
+                  name="healthScore" 
+                  onChange={handleEvents}
+                  style={{borderColor: errors.healthScore && "red"}}
+                />
             </div>
+
           </div>
 
           <div className={styles.formRight}>
-            <h4>Image</h4>
-            <div className={styles.imageContainer}>              
+                  {/* Image Container */}
+            <div className={styles.imageContainer}>
               <figure className={styles.figureContainer}>
-              {imageURLs.map(imageSrc => <img src={imageSrc} alt="Img"/>)}
-              <input type="file" accept="image/*" onChange={onImageChange} name="image" id="image"/>
+              {imageURLs.map((imageSrc,i)=> <img src={imageSrc} alt="Img" key = {i}/>)}
+
+              <input 
+                type="file"
+                accept="image/*" 
+                onChange={onImageChange} 
+                name="image" 
+                id="image"
+                />
               <label htmlFor="image">
                 &nbsp; Choose A photo
               </label>
               </figure>
             </div>
+                  {/* Steps Container */}
             <div className={styles.inputBox}>
-              <label htmlFor="steps">Steps</label>
+              <label htmlFor="steps">Steps *</label>
               <input 
                 type="text"
                 value={step} 
                 name="steps"
-                onChange={(e)=> setStep(e.target.value)}                
+                onChange={(e)=>setStep(e.target.value)}                
                 onKeyDown={(e)=> handleAddTodo(e)}
                 placeholder="Add a Step"
+                style={{borderColor: errors.steps && "red"}}  
               />
 
               <div className={styles.containerToDoList}>
@@ -148,16 +268,22 @@ const Make = () => {
                 ))}
                 
               </div>
-
             </div>
+
           </div>
+
         </div>
         <button onClick={handleSubmit}>Make a Recepi</button>
       </fieldset>
-      
     </section>
+      <Error/>
+    </>
   )
 }
+const mapStateToProps = (state)=> {
+  return{
+    errorFromForm: state.errorFromForm
+  }
+}
 
-
-export default connect()(Make)
+export default connect(mapStateToProps)(Make)

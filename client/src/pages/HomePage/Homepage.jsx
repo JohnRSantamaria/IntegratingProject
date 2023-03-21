@@ -1,6 +1,7 @@
-import React from 'react';
 import Navigation from '../../components/Navigation/Navigation';
 import { Outlet } from 'react-router-dom';
+import { connect } from 'react-redux';
+
 
 const Homepage = () => {
 
@@ -12,4 +13,4 @@ const Homepage = () => {
   )
 }
 
-export default Homepage;
+export default connect()(Homepage);

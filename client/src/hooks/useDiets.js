@@ -3,7 +3,7 @@ import { fetchAllDiets } from "../helpers/fetchAllDiets";
 
 export const useDiets = ()=> {
   const [isLoading, setIsLoading] = useState(true);
-  const [diets, setDiets] = useState([]);
+  const [diet, setDiets] = useState([]);
 
   useEffect(()=> {
     fetchAllDiets()
@@ -14,6 +14,6 @@ export const useDiets = ()=> {
   }, [])
   return{
     isLoading,
-    diets
+    diet
   }
 }

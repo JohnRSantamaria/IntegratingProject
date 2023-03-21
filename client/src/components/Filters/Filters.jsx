@@ -10,7 +10,7 @@ const Filters = ({ apiData, dataBase }) => {
 
   const dispatch = useDispatch();
 
-  const { isLoading, diets } = useDiets();
+  const { isLoading, diet } = useDiets();
 
   const handlerFilter = (event) => {
     dispatch(filteredRecipes(event.target.value));
@@ -38,7 +38,7 @@ const Filters = ({ apiData, dataBase }) => {
           <select onChange={handlerFilter} value="Diets">
             <option disabled hidden>Diets</option>
             <option key={0} value="all">all</option>
-            {diets
+            {diet
               .map(({ id, name }) =>
                 <option key={id} value={name}>
                   {name}

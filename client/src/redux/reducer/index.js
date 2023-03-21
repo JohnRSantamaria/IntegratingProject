@@ -1,23 +1,31 @@
-import { GET_RECIPES, SEARCH_RECIPE, NINE_CARDS, FILTERED_RECIPES, SEARCH_RESULTS, GET_APIDATA, GET_DATABASE, ORDER_ALPHA, ORDER_HEALTHIER } from "../actions/types";
+import {
+  GET_RECIPES,
+  SEARCH_RECIPE,
+  NINE_CARDS,
+  FILTERED_RECIPES,
+  SEARCH_RESULTS,
+  GET_APIDATA,
+  GET_DATABASE,
+  ORDER_ALPHA,
+  ORDER_HEALTHIER,
+  LIST_OF_ERRORS,
+  SET_ERROR
+} from "../actions/types";
 
 const initialState = {
-  recipes : [],
+  recipes: [],
   filteredR: [],
   nineCards: [],
-  apiData:[],
-  dataBase:[],
+  apiData: [],
+  dataBase: [],
   search: "",
-  infoFrom: {
-    healthScore: 0,
-    title:"",
-    image : "",
-    summary: "",
-    steps:[{}],
-    diets:[]    
-  }
-}
+  errorFromForm: [],
+  listOfAllErros: [],
+  showError : false
 
-const rootReducer = (state = initialState, {type,payload}) => {
+};
+
+const rootReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case GET_RECIPES:
       return {
@@ -37,7 +45,8 @@ const rootReducer = (state = initialState, {type,payload}) => {
       };
     case FILTERED_RECIPES:
       let fitered = state.recipes;
-      if (payload !== "all") fitered = state.recipes.filter((recipe) =>
+      if (payload !== "all")
+        fitered = state.recipes.filter((recipe) =>
           recipe.diets.includes(payload)
         );
       return {
@@ -57,17 +66,17 @@ const rootReducer = (state = initialState, {type,payload}) => {
     case GET_DATABASE:
       return {
         ...state,
-        dataBase: payload,
+        dataBase:  payload
       };
     case ORDER_ALPHA:
       let orderAlp = [];
       if (payload === "az")
         orderAlp = [...state.filteredR].sort((a, b) =>
-          a.title === b.title ? 0 : b.title > a.title ? -1 : 1
+          a.title === b.title ? 0 : b.title.toLowerCase() > a.title.toLowerCase() ? -1 : 1
         );
       if (payload === "za")
         orderAlp = [...state.filteredR].sort((a, b) =>
-          a.title === b.title ? 0 : b.title < a.title ? -1 : 1
+          a.title === b.title ? 0 : b.title.toLowerCase() < a.title.toLowerCase() ? -1 : 1
         );
       return {
         ...state,
@@ -75,21 +84,36 @@ const rootReducer = (state = initialState, {type,payload}) => {
       };
 
     case ORDER_HEALTHIER:
-      let orderHealT = []
-      if(payload === "healthier") {
-        orderHealT = [...state.filteredR].sort((a,b)=> b.healthScore - a.healthScore
-        )};
+      let orderHealT = [];
+      if (payload === "healthier") {
+        orderHealT = [...state.filteredR].sort(
+          (a, b) => b.healthScore - a.healthScore
+        );
+      }
 
-      if(payload === "less healthy"){
-        orderHealT = [...state.filteredR].sort((a,b)=> a.healthScore - b.healthScore
-        )};
+      if (payload === "less healthy") {
+        orderHealT = [...state.filteredR].sort(
+          (a, b) => a.healthScore - b.healthScore
+        );
+      }
       return {
         ...state,
         filteredR: orderHealT,
       };
-
+    case LIST_OF_ERRORS:
+      return{
+        ...state,
+        listOfAllErros: payload
+      }
+    case SET_ERROR:
+      return{
+        ...state,
+        showError: payload
+      } 
     default:
-      return { ...state };
+      return { 
+        ...state
+      };      
   }
-}
+};
 export default rootReducer;
