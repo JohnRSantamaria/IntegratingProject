@@ -60,7 +60,7 @@ import { useNavigate } from "react-router-dom";
   }
 
   return (
-    <header className={ isToggleOn? styles.open : ""} onKeyDown={(e)=> handleSearch(e)}>
+    <header className={ `${isToggleOn? styles.open : ""} ${styles.header}`} onKeyDown={(e)=> handleSearch(e)}>
       <a href="/" className={styles.logo} >Henry Food</a>
       <div className={styles.group}>
         <ul className={styles.navigation}>

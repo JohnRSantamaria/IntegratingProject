@@ -5,14 +5,17 @@ import Pagination from "../../components/Pagination/Pagination";
 import styles from "./Cards.module.css";
 import Search from "../../components/Search/Search";
 
-const Cards = ({ nineCards }) => {
+import { Loader } from "../../components/Loader/Loader";
+const Cards = ({ nineCards, isLoadingState }) => {
 
   return (
     <>    
       <Filters/>
       <Search/>
+
       <div className={styles.cardsContainer}>
         {
+          isLoadingState?<Loader/>:
           nineCards.map(({ id, healthScore, title, image, summary, steps, diets }) => (
             <Card
               key={id}
@@ -35,6 +38,7 @@ const Cards = ({ nineCards }) => {
 const mapStateToProps = (state) => {
   return {
     nineCards: state.nineCards,
+    isLoadingState: state.isLoadingState
   }
 }
 

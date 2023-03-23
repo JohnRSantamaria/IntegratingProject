@@ -9,7 +9,9 @@ import {
   ORDER_HEALTHIER,
   ORDER_ALPHA,
   LIST_OF_ERRORS,
-  SET_ERROR
+  SET_ERROR,
+  LOADING,
+  DIETS_DATA
 } from "./types";
 
 export function getRecipes(recipes) {
@@ -86,5 +88,19 @@ export function setError(errorState){
   return{
     type: SET_ERROR,
     payload: errorState
+  }
+}
+
+export function setIsLoading(isLoadingState){
+  return{
+    type: LOADING,
+    payload: isLoadingState
+  }
+}
+
+export function getDietsData(data){
+  return {
+    type: DIETS_DATA,
+    payload: data
   }
 }

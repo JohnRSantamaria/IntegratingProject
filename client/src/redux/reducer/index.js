@@ -9,7 +9,9 @@ import {
   ORDER_ALPHA,
   ORDER_HEALTHIER,
   LIST_OF_ERRORS,
-  SET_ERROR
+  SET_ERROR,
+  LOADING,
+  DIETS_DATA
 } from "../actions/types";
 
 const initialState = {
@@ -21,7 +23,9 @@ const initialState = {
   search: "",
   errorFromForm: [],
   listOfAllErros: [],
-  showError : false
+  dietsData: [],
+  showError : false,
+  isLoadingState: false 
 
 };
 
@@ -110,6 +114,16 @@ const rootReducer = (state = initialState, { type, payload }) => {
         ...state,
         showError: payload
       } 
+    case LOADING:
+      return{
+        ...state,
+        isLoadingState: payload	
+      } 
+    case DIETS_DATA:
+      return{
+        ...state,
+        dietsData: payload
+      }
     default:
       return { 
         ...state

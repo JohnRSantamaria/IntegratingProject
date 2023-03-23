@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom'
+import { Loader } from '../../components/Loader/Loader';
 // import { useSearchID } from "../../hooks/useSearchID";
 
 
@@ -21,7 +22,7 @@ useEffect(()=> {
 
 
   return (
-    isLoading ? <p>Loading...</p>:
+    isLoading ? <Loader/>:
     
     <div>
       <h4>{recipes.title}</h4>

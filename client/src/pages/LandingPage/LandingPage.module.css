@@ -1,0 +1,85 @@
+.cLP {
+  position: absolute;
+  height: 100vh;
+  width: 100%;
+  background: url("../../utils/LandingPage/background.jpg") center;
+  background-size: cover;
+  overflow: hidden;
+}
+
+.contentLP {
+  position: relative;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  user-select: none;
+  top: 100px;
+}
+
+.titleLP {
+  color: #fff;
+  font-size: 4em;
+  letter-spacing: 1rem;
+  pointer-events: none;
+  user-select: none;
+  text-align: center;
+}
+
+.titleLP h1 {
+  -webkit-animation: text-focus-in 3s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+  animation: text-focus-in 3s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+}
+
+.loaderLP {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 350px;
+  height: 350px;
+}
+
+.loaderLP a {
+  font-size: 46px;
+  color: #FFFFFF;
+}
+
+.loaderLP a:hover {
+  color: rgba(255, 250, 240, 0.7);
+}
+
+.loaderLP a:active {
+  position: relative;
+  top: 1px
+}
+
+
+@media screen and (max-width: 1200px) {
+  .titleLP {
+    text-align: center;
+    font-size: 2.9em;
+  }
+}
+
+@media screen and (max-width: 950px) {
+  .contentLP {
+    padding: 0;
+  }
+
+  .titleLP {
+    font-size: 2em;
+  }
+
+  .loaderLP a {
+    font-size: 2em;
+  }
+
+}
+
+@media screen and (max-width: 700px) {
+  .contentLP {
+    padding: 0;
+  }
+}

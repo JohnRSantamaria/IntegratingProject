@@ -1,4 +1,4 @@
-section
+.section
 {
   position: relative;
   display: flex;
@@ -13,7 +13,6 @@ section
 
 .backGround
 {
-  position: absolute;
   width: 100%;
   height: calc(100vh - 80px);
   background-image: url('../../utils/background_form.jpg');

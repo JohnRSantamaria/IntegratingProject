@@ -1,5 +1,4 @@
 import {connect, useDispatch} from "react-redux";
-import { useDiets } from "../../hooks/useDiets";
 import { useState, useEffect } from "react";
 import { getListOfErrors, setError } from "../../redux/actions/actions";
 
@@ -10,8 +9,7 @@ import Error  from "../../components/Error/Error";
 
 
 
-const Make = () => {
-  const { isLoading, diet } = useDiets();
+const Make = ({dietsData}) => {
   const dispatch = useDispatch();
 
   const [ images, setImages ] = useState([]);
@@ -159,8 +157,8 @@ const Make = () => {
   }
 
   return (
-    <>
-    <section>         
+    // <>
+    <section className={styles.section}>         
       <div className={styles.backGround}/>
       
       <fieldset className={styles.container}>
@@ -200,7 +198,7 @@ const Make = () => {
               <label htmlFor="diets">Diets *</label>
               <div className={styles.diets}>                
                   {
-                    isLoading ? <p> loading... </p> : diet.map(diet=> (
+                    dietsData.map(diet=> (
                       <div className={styles.center} key={diet.id}>
                         <label key={diet.id}>
                           <input 
@@ -276,13 +274,14 @@ const Make = () => {
         <button onClick={handleSubmit}>Make a Recepi</button>
       </fieldset>
     </section>
-      <Error/>
-    </>
+//      {/* <Error/> */}
+  //  {/* </> */}
   )
 }
 const mapStateToProps = (state)=> {
   return{
-    errorFromForm: state.errorFromForm
+    errorFromForm: state.errorFromForm,
+    dietsData: state.dietsData
   }
 }
 

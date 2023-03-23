@@ -9,3 +9,5 @@ export const ORDER_ALPHA = "ORDER_ALPHA";
 export const ORDER_HEALTHIER = "ORDER_HEALTHIER";
 export const LIST_OF_ERRORS = "LIST_OF_ERRORS";
 export const SET_ERROR = "SET_ERROR";
+export const LOADING = "LOADING";
+export const DIETS_DATA = "DIETS_DATA";

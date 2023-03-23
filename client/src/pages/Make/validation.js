@@ -1,9 +1,6 @@
 const validation = ({title,summary,diets, healthScore,steps, image})=> {
   var regex = /^[A-Za-z0-9 ]+$/
   const errors = {};
-  
-  console.log(image);
-  
 
   if(!title) errors.title = "Title cannot be Empty";
   if(title.length > 50 ) errors.title = "The title cannot be longer than 50 characters"

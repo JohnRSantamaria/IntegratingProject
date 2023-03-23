@@ -1,21 +1,32 @@
 import { connect, useDispatch } from "react-redux";
-
-import { Loader } from "../Loader/Loader";
-import { useDiets } from "../../hooks/useDiets";
-import { filteredRecipes, searchResults } from "../../redux/actions/actions";
+import { filteredRecipes, searchResults, getDietsData, setIsLoading } from "../../redux/actions/actions";
 
 import  Order  from "../Order/Order";
+import { useState } from "react";
 
-const Filters = ({ apiData, dataBase }) => {
+import { fetchAllDiets } from "../../helpers/fetchAllDiets";
+
+const Filters = ({ apiData, dataBase, dietsData }) => {
 
   const dispatch = useDispatch();
+  
 
-  const { isLoading, diet } = useDiets();
+  useState(()=>{
+    if(dietsData.length === 0){
+      dispatch(setIsLoading(true))
+      fetchAllDiets()
+      .then(diets=> {
+        dispatch(setIsLoading(false))
+        dispatch(getDietsData(diets))
+      })
+    }
+  }, [dietsData])
+  
+  
 
   const handlerFilter = (event) => {
     dispatch(filteredRecipes(event.target.value));
-  }
-
+  }  
 
   const placesFilterHandler = (event) => {
     if (event.target.value === "dataBase") {
@@ -33,12 +44,10 @@ const Filters = ({ apiData, dataBase }) => {
 
     <div>
       {
-        isLoading ?
-          <Loader /> :
           <select onChange={handlerFilter} value="Diets">
             <option disabled hidden>Diets</option>
             <option key={0} value="all">all</option>
-            {diet
+            {dietsData
               .map(({ id, name }) =>
                 <option key={id} value={name}>
                   {name}
@@ -63,6 +72,7 @@ const mapStateToProps = (state) => {
   return {
     apiData: state.apiData,
     dataBase: state.dataBase,
+    dietsData: state.dietsData
   }
 }
 
