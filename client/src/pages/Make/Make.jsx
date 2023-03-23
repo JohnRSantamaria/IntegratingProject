@@ -151,13 +151,9 @@ const Make = ({dietsData}) => {
       dispatch(getListOfErrors(error));
       dispatch(setError(true));
     }
-
-    
-
   }
-
   return (
-    // <>
+   <>
     <section className={styles.section}>         
       <div className={styles.backGround}/>
       
@@ -274,8 +270,8 @@ const Make = ({dietsData}) => {
         <button onClick={handleSubmit}>Make a Recepi</button>
       </fieldset>
     </section>
-//      {/* <Error/> */}
-  //  {/* </> */}
+      <Error/>
+   </> 
   )
 }
 const mapStateToProps = (state)=> {
