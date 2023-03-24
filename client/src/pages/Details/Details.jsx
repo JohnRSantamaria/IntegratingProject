@@ -27,8 +27,8 @@ export const Details = () => {
 
 
   const handlerFilter = (event) => {
-    dispatch(filteredRecipes(event.target.value));
     navigate("/food");
+    dispatch(filteredRecipes(event.target.value));
   }
 
 
@@ -45,20 +45,21 @@ export const Details = () => {
             <h3>★ {recipes.healthScore}</h3>
           </div>
         </div>
+
         <div className={styles.informationContainer}>
           <div className={styles.dietDetail}>
+          <div className={styles.diet}>
             {recipes.diets?.map(diet => (
               <button
                 key={diet}
                 value={diet}
                 onClick={handlerFilter}
-
               >{diet}</button>))}
           </div>
-          <div className={styles.centerContentDetails}>
+          
             <div className={styles.summarryDetails}>
               <h3>Summary</h3>
-              <div dangerouslySetInnerHTML={{ __html: recipes.summary }} />
+              <h4 dangerouslySetInnerHTML={{ __html: recipes.summary }} />
             </div>
             <div className={styles.stepsDetail}>
               <h3>Steps</h3>
@@ -67,10 +68,15 @@ export const Details = () => {
               ))}
             </div>
           </div>
-
+           
+         
         </div>
       </div>
   )
 }
 
 
+/*
+        
+
+*/

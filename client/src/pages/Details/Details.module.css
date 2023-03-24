@@ -2,18 +2,21 @@
 {
   display: flex;
   flex-wrap: wrap;
+  flex-flow: column;
   align-items: flex-start;
-  justify-content: center;
+  justify-content: flex-start;
   min-height: calc(100vh - 120px); 
   min-width: 100%;
   width: 100%;
-  padding: 10px;
+  padding: 5px;
 }
 .backgroundDetails
 {
   position: fixed;
+  top:0;
   background: url('../../utils/background_form.jpg') center;
   background-size: cover;
+  background-attachment: fixed;
   width: 100%;
   height: 100vh;
   filter: blur(5px);
@@ -34,6 +37,7 @@
   height: 100%;
   width: auto;
   border-radius: 50px 0 300px 0;
+  user-select: none;
 }
 .titleDetail
 {
@@ -45,8 +49,8 @@
 }
 .titleDetail h1
 {
-  color: #f0f8ff;
-  font-size: 74px;
+  color: #fffaf0;
+  font-size: 3.3em;
   user-select: none;
 }
 .titleDetail h3
@@ -55,127 +59,120 @@
   right: 40px;
   bottom: 0;
   color: rgb(228, 224, 0);
-  font-size: 48px;
+  font-size: 3em;
   user-select: none;
-  margin: 50px 0;
 }
 .informationContainer
 {
   position: relative;
-  height: 60vh;
-  color: #f0f8ff;
+  width: 100%;
 }
 .dietDetail
 {
-  position: relative;
   display: flex;
   justify-content: center;
-  align-items: center;
-  gap: 40px;
-  width: 100%;
+  flex-wrap: wrap;  
+  flex-flow: column ;
+  gap: 10px;  
 }
 .dietDetail button
 {
-  background: transparent;
-  color: #fffaf0;
+  background-color: transparent;
+  color: #fff;
   border: none;
-  font-size: 1.2rem;
+  text-transform: capitalize;
+  font-size: 1em;
   cursor: pointer;
-  transition: font-size 0.5s;
+  background-color: #5a0802;
+  border-radius: 5px;
+  padding: 2px;
 }
 .dietDetail button:hover
 {
-  color: rgba(255, 250, 240,.5);
+  color: rgba(255, 235, 204,.5); 
 }
 .dietDetail button:active
 {
   position: relative;
   top: 1px;
 }
-
-.centerContentDetails
+.diet
 {
-  position: relative;
   display: flex;
-  flex-flow: row wrap;
   justify-content: center;
   align-items: center;
-  height: calc(100% - 30px);
-}
-.summarryDetails
-{
-  position: relative;
-  width: 50%;
-  height: 100%;
-  overflow: auto;
-  scrollbar-width: none;
-  display: flex;
-  flex-flow: column nowrap;
-  align-items: center;
-  justify-content: flex-start;
-  padding: 0 20px 0 0;
-}
-.summarryDetails::-webkit-scrollbar 
-{
-  width: 0;
-}
-.summarryDetails h3
-{
-  font-size: 46px;
-  margin-bottom: 20px;
-}
-.summarryDetails * 
-{
-  color: #f0f8ff;
-  font-weight: 400;
+  gap: 20px;
 }
 
-.stepsDetail
+
+.stepsDetail,
+.summarryDetails
 {
-  width: 50%;
-  position: relative;
-  width: 50%;
-  height: 100%;
+  height: 27.5vh;
   overflow: auto;
-  scrollbar-width: none;
-  display: flex;
-  flex-flow: column wrap;
-  align-items: flex-start;
-  justify-content: flex-start;
-  padding: 0 20px;
+  scroll-margin: none;
 }
+.stepsDetail *,
+.summarryDetails *
+{
+  color: #fffaf0;
+  font-weight: 400;
+  scroll-margin: none;
+}
+
+.summarryDetails h3,
 .stepsDetail h3
 {
-  font-size: 3rem;
-  margin-bottom: 20px;
-  font-weight: 400;
-}
-.stepsDetail h4
-{
-  font-weight: 400;
+  text-align: center;
+  font-size: 1.5rem;  
+  color: rgb(255, 235, 204);
 }
 
 /* responsive */
 @media screen and (max-width: 960px) 
 {
+  .imageContainerDetails
+  {
+    height:20vh;
+  }
   .titleDetail h1
   {
-    font-size: 3em;
+    font-size: 2.5em;
+  }
+  .titleDetail h3
+  {
+    font-size: 2.5em;
+  }
+  .stepsDetail,
+  .summarryDetails
+  {
+    height: 33vh;
+  }
+
+}
+@media screen and (max-width: 750px) 
+{
+  .titleDetail h1
+  {
+    font-size: 2em;
   }
   .titleDetail h3
   {
     font-size: 2em;
   }
-  .dietDetail button
+}
+@media screen and (max-width: 520px) 
+{
+  .imageContainerDetails
+  {
+    height:10vh;
+  }
+  .titleDetail h1
+  {
+    font-size: 1.2em;
+  }
+  .titleDetail h3
   {
     font-size: 1em;
-  }
-  .summarryDetails h3
-  {
-    font-size: 2em;
-  }
-  .stepsDetail h3
-  {
-    font-size: 2em;
-  }
+  } 
 }

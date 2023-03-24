@@ -19,7 +19,9 @@ const Pagination = ({ filteredR, dataBase }) => {
   const {infoDB} = useDB();
 
   useEffect(()=> {
+    if(infoDB.length=== 0) return;
     if(dataBase.length !== infoDB.length){
+      console.log("entro"); 
       dispatch(setIsLoading(true))
       fetchDataBase()
       .then(db => {
