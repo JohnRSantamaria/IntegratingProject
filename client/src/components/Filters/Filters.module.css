@@ -1,0 +1,12 @@
+.filtersContainer select
+{
+  background-color:#ffebcd;
+  color: #5a0802;
+  border-radius: 0 0 8px 8px;
+}
+.filtersContainer option
+{
+  color: #5a0802;
+  background-color: #ffebcd;
+  border-radius: 8px;
+}

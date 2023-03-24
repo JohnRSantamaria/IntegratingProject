@@ -61,7 +61,7 @@ import { useNavigate } from "react-router-dom";
 
   return (
     <header className={ `${isToggleOn? styles.open : ""} ${styles.header}`} onKeyDown={(e)=> handleSearch(e)}>
-      <a href="/" className={styles.logo} >Henry Food</a>
+      <a href="/" className={styles.logo} >HENRY FOOD</a>
       <div className={styles.group}>
         <ul className={styles.navigation}>
           <li><Link to="/food" onClick={handleClick}>Home</Link></li>

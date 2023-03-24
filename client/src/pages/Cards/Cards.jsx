@@ -1,8 +1,11 @@
 import { connect } from "react-redux"
+
 import { Card } from "../Card/Card";
-import Filters from "../../components/Filters/Filters";
-import Pagination from "../../components/Pagination/Pagination";
 import styles from "./Cards.module.css";
+
+import Pagination from "../../components/Pagination/Pagination";
+import Filters from "../../components/Filters/Filters";
+import Order from "../../components/Order/Order";
 import Search from "../../components/Search/Search";
 
 import { Loader } from "../../components/Loader/Loader";
@@ -11,9 +14,12 @@ const Cards = ({ nineCards, isLoadingState }) => {
   return (
     <>
     <div className={styles.backgroundCards}/>
-    <div className={styles.filterCards}>
-      <Filters />
-      <Search />
+    <div className={styles.filterCards} >
+      <Search/>
+      <div className={styles.filteredContainer}>
+        <Filters/>
+        <Order/>
+      </div>      
     </div>    
     <div className={styles.cardsContainer}>
           {

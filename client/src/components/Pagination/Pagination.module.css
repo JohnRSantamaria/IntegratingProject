@@ -16,7 +16,7 @@
   height: 1.5rem;
   width: 3rem;
   color: #fffaf0;
-  background: transparent;
+  background: #810e05;
   border-radius: 5px;
 }
 
@@ -27,12 +27,12 @@
   width: 1.5rem;
   border-radius: 5px;
   color: #fffaf0;
-  background: transparent;
+  background: #810e05;
   margin: 0 1px;
 }
 .containerP :not(:first-child):not(:last-child):focus
 {
   background: #232323;
   color: #fff;
-  text-decoration: underline;
+  text-decoration: #810e05;
 }

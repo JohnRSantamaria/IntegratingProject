@@ -1,10 +1,8 @@
-import { connect, useDispatch } from "react-redux";
-import { filteredRecipes, searchResults, getDietsData, setIsLoading } from "../../redux/actions/actions";
-
-import  Order  from "../Order/Order";
 import { useState } from "react";
-
+import { connect, useDispatch } from "react-redux";
 import { fetchAllDiets } from "../../helpers/fetchAllDiets";
+import { filteredRecipes, searchResults, getDietsData, setIsLoading } from "../../redux/actions/actions";
+import styles from "./Filters.module.css";
 
 const Filters = ({ apiData, dataBase, dietsData }) => {
 
@@ -42,7 +40,8 @@ const Filters = ({ apiData, dataBase, dietsData }) => {
 
   return (
 
-    <div>
+    <div className={styles.filtersContainer}>
+
       {
           <select onChange={handlerFilter} value="Diets">
             <option disabled hidden>Diets</option>
@@ -62,8 +61,6 @@ const Filters = ({ apiData, dataBase, dietsData }) => {
         <option key={1} value="dataBase">data dase</option>
         <option key={2} value="API">API</option>
       </select>
-      <Order/>
-
     </div>
   )
 }

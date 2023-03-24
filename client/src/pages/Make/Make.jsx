@@ -1,7 +1,8 @@
 import {connect, useDispatch} from "react-redux";
 import { useState, useEffect } from "react";
-import { getListOfErrors, setError } from "../../redux/actions/actions";
+import { useNavigate } from "react-router-dom";
 
+import { getListOfErrors, setError } from "../../redux/actions/actions";
 import validation from "./validation.js";
 import styles from "./Make.module.css";
 import Error  from "../../components/Error/Error";
@@ -11,7 +12,7 @@ import Error  from "../../components/Error/Error";
 
 const Make = ({dietsData}) => {
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const [ images, setImages ] = useState([]);
   const [ imageURLs, setImageURLs ] = useState(['https://img.freepik.com/vector-premium/icono-vector-imagen-signo-foto-aislado_118339-3177.jpg?w=826']);
   const [step, setStep] = useState('');
@@ -143,6 +144,7 @@ const Make = ({dietsData}) => {
         if(response.status !== 200) throw new Error("There was an error creating the recipe.");
 
         window.alert("The recipe was created successfully");
+        navigate("/food");
           
       } catch (error) {
         window.alert("There was an error creating the recipe");

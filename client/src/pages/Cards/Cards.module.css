@@ -15,6 +15,16 @@
   filter: blur(2px);
   opacity: .7;
 }
+.filteredContainer
+{
+  position: relative;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-self: center;
+  width: 100vw;
+}
+
 .filterCards
 {
   position: fixed;
